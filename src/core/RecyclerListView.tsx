@@ -110,6 +110,7 @@ export interface RecyclerListViewProps {
     scrollViewProps?: object;
     applyWindowCorrection?: (offsetX: number, offsetY: number, windowCorrection: WindowCorrection) => void;
     onItemLayout?: (index: number) => void;
+    getViewHolderForType?: (type: string | number) => JSX.Element;
 }
 
 export interface RecyclerListViewState {
@@ -615,7 +616,9 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
                     itemAnimator={Default.value<ItemAnimator>(this.props.itemAnimator, this._defaultItemAnimator)}
                     extendedState={this.props.extendedState}
                     internalSnapshot={this.state.internalSnapshot}
-                    onItemLayout={this.props.onItemLayout}/>
+                    onItemLayout={this.props.onItemLayout}
+                    getViewHolderForType={this.props.getViewHolderForType} 
+                />
             );
         }
         return null;
@@ -802,6 +805,10 @@ RecyclerListView.propTypes = {
     //For all props that need to be proxied to inner/external scrollview. Put them in an object and they'll be spread
     //and passed down.
     scrollViewProps: PropTypes.object,
+
+    //Function to receive the row type and returns a component to wrap the row children in.
+    //Useful for implementing row reordering with drag and drop.
+    getViewHolderForType: PropTypes.func,
 
     // Used when the logical offsetY differs from actual offsetY of recyclerlistview, could be because some other component is overlaying the recyclerlistview.
     // For e.x. toolbar within CoordinatorLayout are overlapping the recyclerlistview.
