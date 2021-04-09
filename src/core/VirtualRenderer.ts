@@ -242,7 +242,7 @@ export default class VirtualRenderer {
         const stackItem = renderStack[key];
         if (stackItem && stackItem.dataIndex !== index) {
             //Probable collision, warn
-            console.warn("Possible stableId collision @", index); //tslint:disable-line
+            //console.warn("Possible stableId collision @", index); //tslint:disable-line
         }
         return key;
     }

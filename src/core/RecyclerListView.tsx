@@ -111,6 +111,7 @@ export interface RecyclerListViewProps {
     applyWindowCorrection?: (offsetX: number, offsetY: number, windowCorrection: WindowCorrection) => void;
     onItemLayout?: (index: number) => void;
     getViewHolderForType?: (type: string | number) => JSX.Element;
+    viewHolderProps?: object;
 }
 
 export interface RecyclerListViewState {
@@ -598,6 +599,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
             if (!this.props.forceNonDeterministicRendering) {
                 this._checkExpectedDimensionDiscrepancy(itemRect, type, dataIndex);
             }
+            
             return (
                 <ViewRenderer key={key} data={data}
                     dataHasChanged={this._dataHasChanged}
@@ -617,7 +619,8 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
                     extendedState={this.props.extendedState}
                     internalSnapshot={this.state.internalSnapshot}
                     onItemLayout={this.props.onItemLayout}
-                    getViewHolderForType={this.props.getViewHolderForType} 
+                    getViewHolderForType={this.props.getViewHolderForType}
+                    viewHolderProps={this.props.viewHolderProps}
                 />
             );
         }
@@ -809,6 +812,9 @@ RecyclerListView.propTypes = {
     //Function to receive the row type and returns a component to wrap the row children in.
     //Useful for implementing row reordering with drag and drop.
     getViewHolderForType: PropTypes.func,
+
+    //Props for view holder component.
+    viewHolderProps: PropTypes.object,
 
     // Used when the logical offsetY differs from actual offsetY of recyclerlistview, could be because some other component is overlaying the recyclerlistview.
     // For e.x. toolbar within CoordinatorLayout are overlapping the recyclerlistview.

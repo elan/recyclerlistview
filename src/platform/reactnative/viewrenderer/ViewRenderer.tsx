@@ -16,6 +16,7 @@ export default class ViewRenderer extends BaseViewRenderer<any> {
         const ViewHolder: any = this.props.getViewHolderForType ? this.props.getViewHolderForType(this.props.layoutType) : View;
         return this.props.forceNonDeterministicRendering ? (
             <ViewHolder ref={this._setRef}
+            {...(this.props.viewHolderProps || {})}
             onLayout={this._onLayout}
                 style={{
                     flexDirection: this.props.isHorizontal ? "column" : "row",
@@ -29,6 +30,7 @@ export default class ViewRenderer extends BaseViewRenderer<any> {
             </ViewHolder>
         ) : (
                 <ViewHolder ref={this._setRef}
+                    {...(this.props.viewHolderProps || {})}
                     style={{
                         left: this.props.x,
                         position: "absolute",
