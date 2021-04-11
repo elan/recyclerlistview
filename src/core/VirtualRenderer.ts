@@ -113,6 +113,10 @@ export default class VirtualRenderer {
         }
     }
 
+    public getRecyclePool(): RecycleItemPool {
+        return this._recyclePool;
+    }
+
     public getLayoutManager(): LayoutManager | null {
         return this._layoutManager;
     }
@@ -248,7 +252,7 @@ export default class VirtualRenderer {
         const stackItem = renderStack[key];
         if (stackItem && stackItem.dataIndex !== index) {
             //Probable collision, warn
-            //console.warn("Possible stableId collision @", index); //tslint:disable-line
+            console.warn("Possible stableId collision @", index); //tslint:disable-line
         }
         return key;
     }

@@ -39,6 +39,7 @@ export default class RecycleItemPool {
             delete objectSet[recycledObject];
             delete this._availabilitySet[recycledObject];
         }
+
         return recycledObject;
     }
 

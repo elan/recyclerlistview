@@ -353,6 +353,17 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         });
     }
 
+    public removeItemFromRecyclePool(dataIndex: number): boolean {
+        const type = this.props.layoutProvider.getLayoutTypeForIndex(dataIndex);
+        const key = this._virtualRenderer.syncAndGetKey(dataIndex);
+
+        return this._virtualRenderer.getRecyclePool().removeFromPool(key);
+    }
+
+    public addItemtoRecyclePool(objectType: string | number, object: string): void {
+        this._virtualRenderer.getRecyclePool().putRecycledObject(objectType, object);
+    }
+
     public renderCompat(): JSX.Element {
         //TODO:Talha
         // const {
@@ -599,7 +610,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
             if (!this.props.forceNonDeterministicRendering) {
                 this._checkExpectedDimensionDiscrepancy(itemRect, type, dataIndex);
             }
-            
+
             return (
                 <ViewRenderer key={key} data={data}
                     dataHasChanged={this._dataHasChanged}
