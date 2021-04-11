@@ -27,18 +27,20 @@ export default class ViewRenderer extends BaseViewRenderer<any> {
         const ViewHolder: any = this.props.getViewHolderForType ? this.props.getViewHolderForType(this.props.layoutType) : "div";
         const style: CSSProperties = this.props.forceNonDeterministicRendering
             ? {
-                transform: this._getTransform(),
-                WebkitTransform: this._getTransform(),
+                position: "absolute",
+                left: this.props.x,
+                top: this.props.y,
                 ...styles.baseViewStyle,
                 ...this.props.styleOverrides,
                 ...this.animatorStyleOverrides,
             }
             : {
+                position: "absolute",
+                left: this.props.x,
+                top: this.props.y,
+                width: this.props.width,
                 height: this.props.height,
                 overflow: "hidden",
-                width: this.props.width,
-                transform: this._getTransform(),
-                WebkitTransform: this._getTransform(),
                 ...styles.baseViewStyle,
                 ...this.props.styleOverrides,
                 ...this.animatorStyleOverrides,
