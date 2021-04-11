@@ -29,6 +29,7 @@ export interface ViewRendererProps<T> {
     layoutProvider?: BaseLayoutProvider;
     onItemLayout?: (index: number) => void;
     getViewHolderForType?: (type: string | number) => JSX.Element;
+    viewHolderProps?: object;
 }
 export default abstract class BaseViewRenderer<T> extends ComponentCompat<ViewRendererProps<T>, {}> {
     protected animatorStyleOverrides: object | undefined;
