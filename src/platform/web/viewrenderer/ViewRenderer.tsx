@@ -44,7 +44,7 @@ export default class ViewRenderer extends BaseViewRenderer<any> {
                 ...this.animatorStyleOverrides,
             };
         return (
-            <ViewHolder ref={this._setRef} style={style}>
+            <ViewHolder ref={this._setRef} style={style} {...(this.props.viewHolderProps || {})}>
                 {this.renderChild()}
             </ViewHolder>
         );
