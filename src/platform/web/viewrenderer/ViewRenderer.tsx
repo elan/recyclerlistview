@@ -94,6 +94,6 @@ const styles: { [key: string]: CSSProperties } = {
         padding: 0,
         position: "absolute",
         minHeight: 0,
-        minWidth: 0
+        minWidth: 0,
     },
 };
