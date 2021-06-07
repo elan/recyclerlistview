@@ -508,7 +508,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         this._layout.height = layout.height;
         this._layout.width = layout.width;
         if (layout.height === 0 || layout.width === 0) {
-            throw new CustomError(RecyclerListViewExceptions.layoutException);
+            return;
         }
         if (!this._initComplete) {
             this._initComplete = true;
