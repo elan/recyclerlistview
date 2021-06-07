@@ -112,6 +112,7 @@ export interface RecyclerListViewProps {
     onItemLayout?: (index: number) => void;
     getViewHolderForType?: (type: string | number) => JSX.Element;
     viewHolderProps?: object;
+    marginHorizontal?: number;
 }
 
 export interface RecyclerListViewState {
@@ -503,6 +504,12 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         if (!this.props.canChangeSize && this.props.layoutSize) {
             return;
         }
+
+        // Adjust for margins.
+        if (typeof this.props.marginHorizontal === "number") {
+            layout.width = Math.max(0, layout.width - this.props.marginHorizontal);
+        }
+
         const hasHeightChanged = this._layout.height !== layout.height;
         const hasWidthChanged = this._layout.width !== layout.width;
         this._layout.height = layout.height;
@@ -826,6 +833,9 @@ RecyclerListView.propTypes = {
 
     //Props for view holder component.
     viewHolderProps: PropTypes.object,
+
+    // Horizontal margin.
+    marginHorizontal: PropTypes.number,
 
     // Used when the logical offsetY differs from actual offsetY of recyclerlistview, could be because some other component is overlaying the recyclerlistview.
     // For e.x. toolbar within CoordinatorLayout are overlapping the recyclerlistview.
