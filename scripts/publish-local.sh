@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-TARGET=$"/Users/talha.naqvi/Documents/Work/RLV-Demo/node_modules/recyclerlistview/dist" #target-path
+TARGET=$"/Users/elan/Code/JS/reanimated-2-playground/node_modules/@elanf/recyclerlistview/dist" #target-path
 
 npm run build
 
-echo "copying build..."
-echo "copying to $TARGET.."
+echo "Copying build..."
+echo "Copying to $TARGET..."
 rm -rf "$TARGET"
 cp -r dist "$TARGET"
 
-echo "copy complete."
+echo "Copy complete."
