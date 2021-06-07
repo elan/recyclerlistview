@@ -38,9 +38,8 @@ export default class ViewRenderer extends BaseViewRenderer<any> {
                 position: "absolute",
                 left: this.props.x,
                 top: this.props.y,
-                width: this.props.width,
                 height: this.props.height,
-                overflow: "hidden",
+                width: this.props.width,
                 ...styles.baseViewStyle,
                 ...this.props.styleOverrides,
                 ...this.animatorStyleOverrides,
@@ -95,8 +94,6 @@ const styles: { [key: string]: CSSProperties } = {
         padding: 0,
         position: "absolute",
         minHeight: 0,
-        minWidth: 0,
-        left: 0,
-        top: 0,
+        minWidth: 0
     },
 };
