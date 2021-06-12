@@ -504,6 +504,9 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         if (!this.props.canChangeSize && this.props.layoutSize) {
             return;
         }
+        if (layout.height === 0 || layout.width === 0) {
+            return;
+        }
 
         // Adjust for margins.
         if (typeof this.props.layoutMarginHorizontal === "number") {
@@ -514,9 +517,6 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         const hasWidthChanged = this._layout.width !== layout.width;
         this._layout.height = layout.height;
         this._layout.width = layout.width;
-        if (layout.height === 0 || layout.width === 0) {
-            return;
-        }
         if (!this._initComplete) {
             this._initComplete = true;
             this._initTrackers(this.props);
