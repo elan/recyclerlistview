@@ -174,8 +174,14 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         };
         this._getContextFromContextProvider(props);
         if (props.layoutSize) {
+            // Adjust for margins.
+            let widthOffset = 0;
+            if (typeof this.props.layoutMarginHorizontal === "number") {
+                widthOffset = this.props.layoutMarginHorizontal;
+            }
+
             this._layout.height = props.layoutSize.height;
-            this._layout.width = props.layoutSize.width;
+            this._layout.width = props.layoutSize.width - widthOffset;
             this._initComplete = true;
             this._initTrackers(props);
         } else {
