@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-TARGET=$"/Users/elan/Code/JS/reanimated-2-playground/node_modules/@elanf/recyclerlistview/dist" #target-path
+TARGET=$"/Users/elan/Code/JS/labs/node_modules/@elanf/recyclerlistview/dist" #target-path
 
 npm run build
 
