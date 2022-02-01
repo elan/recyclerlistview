@@ -149,6 +149,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         renderAheadOffset: 250,
     };
     private _layout: Dimension = { height: 0, width: 0 };
+    private _originalLayoutWidth: number = 0;
     private _pendingScrollToOffset: Point | null = null;
     private _tempDim: Dimension = { height: 0, width: 0 };
     private _initialOffset = 0;
@@ -206,12 +207,21 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         }
     }
 
-    public componentDidUpdate(): void {
+    public componentDidUpdate(prevProps: RecyclerListViewProps): void {
         this._processInitialOffset();
         this._processOnEndReached();
         this._checkAndChangeLayouts(this.props);
         if (this.props.dataProvider.getSize() === 0) {
             console.warn(Messages.WARN_NO_DATA); //tslint:disable-line
+        }
+
+        if (prevProps.layoutMarginHorizontal !== this.props.layoutMarginHorizontal) {
+            let widthOffset = 0;
+            if (typeof this.props.layoutMarginHorizontal === "number") {
+                widthOffset = this.props.layoutMarginHorizontal;
+            }
+
+            this._layout.width = Math.max(0, this._originalLayoutWidth - widthOffset);
         }
     }
 
@@ -515,8 +525,9 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
         }
 
         // Adjust for margins.
+        this._originalLayoutWidth = layout.width;
         if (typeof this.props.layoutMarginHorizontal === "number") {
-            layout.width = Math.max(0, layout.width - this.props.layoutMarginHorizontal);
+            layout.width = Math.max(0, this._originalLayoutWidth - this.props.layoutMarginHorizontal);
         }
 
         const hasHeightChanged = this._layout.height !== layout.height;
